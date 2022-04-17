@@ -49,8 +49,64 @@ else:
 
 
 # 2. Создать список, состоящий из кубов нечётных чисел от 1 до 1000 (куб X - третья степень числа X):
-# Вычислить сумму тех чисел из этого списка, сумма цифр которых делится нацело на 7. Например, число «19 ^ 3 = 6859» будем включать в сумму, так как 6 + 8 + 5 + 9 = 28 – делится нацело на 7. Внимание: использовать только арифметические операции!
+# Вычислить сумму тех чисел из этого списка, сумма цифр которых делится нацело на 7.
+# Например, число «19 ^ 3 = 6859» будем включать в сумму, так как 6 + 8 + 5 + 9 = 28 – делится нацело на 7.
+# Внимание: использовать только арифметические операции!
 # К каждому элементу списка добавить 17 и заново вычислить сумму тех чисел из этого списка, сумма цифр которых делится нацело на 7.
+
+target_list = []
+target_summa = 0
+for item_in_range in range(1,100,2):
+    target_list.append(pow(item_in_range,3))
+print(target_list)
+
+
+for item_in_list in target_list:
+    print()
+    print('Разбор цифр', item_in_list)
+    count_1000000 = item_in_list // 1000000
+    remains_from_1000000 = item_in_list % 1000000
+    count_100000 = remains_from_1000000 // 100000
+    remains_from_100000 = item_in_list % 100000
+    count_10000 = remains_from_100000 // 10000
+    remains_from_10000 = item_in_list % 10000
+    count_1000 = remains_from_10000 // 1000
+    remains_from_1000 = item_in_list % 1000
+    count_100 = remains_from_1000 // 100
+    remains_from_100 = item_in_list % 100
+    count_10 = remains_from_100 // 10
+    remains_from_10 = item_in_list % 10
+    count_1 = remains_from_10
+
+
+    print(count_1000000)
+    print(count_100000)
+    print(count_10000)
+    print(count_1000)
+    print(count_100)
+    print(count_10)
+    print(count_1)
+
+
+    summa = (
+            count_1 +
+            + count_10
+            + count_100
+            + count_1000
+            + count_10000
+            + count_100000
+            + count_1000000
+    )
+    print(summa)
+    if summa % 7 == 0 :
+        print('Сумма цифр = ', summa, '(делится на 7 без остатка)')
+        print('--->  Собираем итоговую сумму:', target_summa, ' + ',item_in_list, ' = ', target_summa + item_in_list)
+        target_summa += item_in_list
+    else:
+        print('Сумма цифр = ', summa, '(НЕ делится на 7 без остатка)')
+
+print('Итоговая сумма', target_summa)
+
 
 # 3.Склонение слова
 # Реализовать склонение слова «процент» во фразе «N процентов». Вывести эту фразу на экран отдельной строкой для каждого из чисел в интервале от 1 до 100:
@@ -63,12 +119,3 @@ else:
 # ...
 # 100 процентов
 #
-
-
-# def print_hi(name):
-#     # Use a breakpoint in the code line below to debug your script.
-#     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-#
-#
-# if __name__ == '__main__':
-#     print_hi('PyCharm')
