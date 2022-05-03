@@ -11,6 +11,11 @@
 #  Скрины нумеровать двухразрядными числами, например: «01.jpg», «02.jpg».
 #  Если будут проблемы с pillow - можно поработать с другим пакетом: например, requests.
 
+print()
+print('Задание 1')
+print('________________________________________________________')
+print()
+print('Скриншоты приложил во вложение')
 
 # ГЛОБАЛЬНОЕ ОКРУЖЕНИЕ
 
@@ -53,6 +58,8 @@
 # Name: Pillow
 # Version: 9.1.0
 
+
+
 # 2. Написать функцию currency_rates(),
 # принимающую в качестве аргумента код валюты (например, USD, EUR, GBP, ...)
 # и возвращающую курс этой валюты по отношению к рублю. Использовать библиотеку requests.
@@ -66,17 +73,52 @@
 # Можно ли сделать работу функции не зависящей от того, в каком регистре был передан аргумент?
 # В качестве примера выведите курсы доллара и евро.
 
+print()
+print('Задание 2')
+print('________________________________________________________')
+print()
+
+
 import requests
+import json
+import xmltodict
 
 def currency_rates(currency_name):
-    url = 'http: // www.cbr.ru / scripts / XML_daily.asp'
+    url = 'http://www.cbr.ru/scripts/XML_daily.asp'
     response = requests.get(url, verify=False)
-    print(response.status_code)
-    temp_json = response.json()
-    print(temp_json)
-    pass
+    print('Код ответа на запрос к API (http://www.cbr.ru/scripts/XML_daily.asp):', response.status_code)
+    temp_content = response.content
+    # ответ ролоучаем в виде xml
+    # пример
+    """
+    ValCurs Date="30.04.2022" name="Foreign Currency Market">
+     <Valute ID="R01010">
+      <NumCode>036</NumCode>
+      <CharCode>AUD</CharCode>
+      <Nominal>1</Nominal>
+      <Name>Австралийский доллар</Name>
+     <Value>50,7677</Value>
+     </Valute>
+      <Valute ID="R01020A">
+      <NumCode>944</NumCode>
+      <CharCode>AZN</CharCode>
+      <Nominal>1</Nominal>
+      <Name>Азербайджанский манат</Name>
+      <Value>41,7786</Value>
+     </Valute>
+    """
 
-currency_rates('USD')
+
+    # Чтобы элегантно превратить XML в словарь будем использовать xmltodict
+    dict_result = xmltodict.parse(temp_content)
+    # Вытаскиваем из словаря список словарей
+    list_valute = dict_result['ValCurs']['Valute']
+    for item in list_valute:
+        if item['CharCode'] == currency_name:
+            print(item['Name'], ':', item['Value'])
+            break
+
+currency_rates('AUD')
 
 
 
@@ -84,4 +126,7 @@ currency_rates('USD')
 # Создать скрипт, в котором импортировать этот модуль и выполнить несколько вызовов функции currency_rates().
 # Убедиться, что ничего лишнего не происходит.
 
-
+print()
+print('Задание 4')
+print('________________________________________________________')
+print()
