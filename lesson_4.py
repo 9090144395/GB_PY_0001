@@ -108,6 +108,7 @@ def currency_rates(currency_name):
      </Valute>
     """
 
+    find_ok = False
 
     # Чтобы элегантно превратить XML в словарь будем использовать xmltodict
     dict_result = xmltodict.parse(temp_content)
@@ -115,10 +116,39 @@ def currency_rates(currency_name):
     list_valute = dict_result['ValCurs']['Valute']
     for item in list_valute:
         if item['CharCode'] == currency_name:
-            print(item['Name'], ':', item['Value'])
+            print(item['Name'])
+            temp_value = str(item['Value'])
+            temp_value_float = float(temp_value.replace(',', '.'))
+            #print(temp_value_float)
+            #print(type(temp_value_float))
+            find_ok =True
             break
+    if find_ok:
+        return temp_value_float
+    else:
+        return None
 
-currency_rates('AUD')
+result = currency_rates('USD')
+print(result)
+print(type(result))
+
+print()
+result = currency_rates('EUR')
+print(result)
+print(type(result))
+
+print()
+print('Проверка None для несуществующей валюты: currency_rates(\'AUDhghjg\')')
+print(currency_rates('AUDhghjg'))
+
+
+# Можно ли, используя только методы класса str, решить поставленную задачу?
+# Да - перебором строк ответа и поиском подстроки, однако нужно потратить много времени на формирование чистого ответа без тегов xml
+
+# есть ли смысл для работы с денежными величинами использовать вместо float тип Decimal? Да, так как плавающая запятая вносит много проблем
+# Сильно ли усложняется код функции при этом? Нет
+
+# Можно ли сделать работу функции не зависящей от того, в каком регистре был передан аргумент? Да
 
 
 
