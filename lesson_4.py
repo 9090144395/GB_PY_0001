@@ -76,7 +76,7 @@ def currency_rates(currency_name):
     print(temp_json)
     pass
 
-
+currency_rates('USD')
 
 
 
