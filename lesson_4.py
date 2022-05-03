@@ -160,3 +160,8 @@ print()
 print('Задание 4')
 print('________________________________________________________')
 print()
+
+import utils
+
+result = utils.currency_rates('USD')
+print(result)
