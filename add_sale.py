@@ -1,23 +1,29 @@
 import json
 import sys
 
-#rezult_for_add = input()
+#   для записи данных и для вывода на экран записанных данных.
+#   При записи передавать из командной строки значение суммы продаж.
+#   Данные хранить в файле bakery.csv в кодировке utf-8. Нумерация записей начинается с 1.
 
+#rezult_for_add = input()
 program, *args = sys.argv
 
-
-print()
-print('считываем записанный файл sales.json')
+#print()
+#print('считываем файл sales.json')
 
 try:
-    with open('sales.json', 'r', encoding='utf-8') as file_in:
-        rezult = json.load(file_in)
+    with open('bakery.csv', 'r', encoding='utf-8') as file_in:
+        rezult = file_in.readlines()
 except FileNotFoundError:
     rezult = []
+    rezult.append('\n')
 
-rezult.append(args)
 
+for arg in args:
+    rezult.append(arg + '\n')
 
-print('Перезаписываем результат в файл sales.json')
-with open('sales.json', 'w', encoding='utf-8') as file_sales:
-    json.dump(rezult, file_sales)
+#print('Перезаписываем результат в файл sales.json')
+with open('bakery.csv', 'w', encoding='utf-8') as file_sales:
+    file_sales.writelines(rezult)
+
+print('Запись добавлена')

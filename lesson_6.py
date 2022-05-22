@@ -184,3 +184,10 @@ with open('users.csv', 'r', encoding='utf-8') as file_users:
 # 5978,5
 # 8914,3
 # 7879,1
+
+print()
+print('Задание 6')
+print('________________________________________________________')
+print()
+
+print('Файлы add_sale.py и show_sales.py созданы.')
