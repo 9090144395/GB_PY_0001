@@ -9,7 +9,7 @@ import sys
 program, *args = sys.argv
 
 #print()
-#print('считываем файл sales.json')
+#print('считываем файл')
 
 try:
     with open('bakery.csv', 'r', encoding='utf-8') as file_in:
@@ -22,7 +22,7 @@ except FileNotFoundError:
 for arg in args:
     rezult.append(arg + '\n')
 
-#print('Перезаписываем результат в файл sales.json')
+#print('Перезаписываем результат в файл ')
 with open('bakery.csv', 'w', encoding='utf-8') as file_sales:
     file_sales.writelines(rezult)
 
